@@ -39,6 +39,12 @@ ai-text-assistant/
 └── .env (not uploaded)
 ```
 
+# AI Text Assistant 🤖
+
+**🚀 Live Demo:** [Try AI Text Assistant](https://pallavi-ai-text-assistant.streamlit.app/)
+
+An AI-powered text assistant built using Python, Streamlit, and Google Gemini API.
+
 ## ⚙️ Installation & Setup
 
 ### 1. Clone the repository
