@@ -1,0 +1,343 @@
+# AI Text Assistant – Interview Questions & Answers
+
+## SECTION 1: Python Environment & Project Setup
+
+### Q1. What is Python?
+**Answer:** Python is a high-level, interpreted, general-purpose programming language. It is known for its simple syntax and is widely used in web development, automation, data science, and artificial intelligence.
+
+### Q2. What is a Python interpreter?
+**Answer:** A Python interpreter executes Python code line by line or through its execution process. It converts Python code into instructions that the computer can execute.
+
+### Q3. What is a virtual environment in Python?
+**Answer:** A virtual environment is an isolated Python environment that allows us to install project-specific packages without affecting other Python projects on our system.
+
+### Q4. Why do we use a virtual environment?
+**Answer:** We use virtual environments to manage dependencies separately for each project, avoid version conflicts, and maintain a consistent development environment.
+
+### Q5. How do you create a virtual environment?
+**Answer:** We use the following command:
+
+```bash
+python -m venv .venv
+```
+
+Here:
+- `python` invokes the Python interpreter.
+- `-m` runs a Python module.
+- `venv` is Python's built-in virtual environment module.
+- `.venv` is the environment folder name.
+
+### Q6. How do you activate a virtual environment in Windows PowerShell?
+**Answer:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+After activation, the environment name appears in the terminal.
+
+### Q7. How do you deactivate a virtual environment?
+**Answer:**
+
+```bash
+deactivate
+```
+
+### Q8. What is pip?
+**Answer:** Pip is Python's package installer. It helps us install, update, and manage external Python libraries.
+
+### Q9. Why do we use `python -m pip` instead of only `pip`?
+**Answer:** It ensures that pip runs through the currently selected Python interpreter. This helps avoid installing packages in the wrong Python environment.
+
+### Q10. What is requirements.txt?
+**Answer:** `requirements.txt` is a file that contains the Python packages required by a project. It helps other developers install the project's dependencies.
+
+### Q11. How do you install dependencies from requirements.txt?
+**Answer:**
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### Q12. What are direct and transitive dependencies?
+**Answer:**
+- Direct dependencies are packages that we explicitly install and use in our project.
+- Transitive dependencies are additional packages required by our direct dependencies.
+
+For example, Streamlit may require other packages to work correctly.
+
+### Q13. What is the difference between pip install and pip freeze?
+**Answer:**
+- `pip install` installs packages.
+- `pip freeze` displays installed packages and their versions.
+
+---
+
+## SECTION 2: Streamlit & User Interface
+
+### Q14. What is Streamlit?
+**Answer:** Streamlit is an open-source Python framework used to build interactive web applications, especially for data science and AI projects, without requiring extensive frontend development.
+
+### Q15. Why did you choose Streamlit for your project?
+**Answer:** I chose Streamlit because it allows me to build an interactive user interface directly using Python. It is useful for quickly developing and testing AI applications.
+
+### Q16. What is the purpose of st.title()?
+**Answer:** `st.title()` displays the main heading of a Streamlit application.
+
+### Q17. What is the difference between st.write() and st.text_area()?
+**Answer:**
+- `st.write()` displays text, data, and other supported objects.
+- `st.text_area()` creates a multiline text input or display area.
+
+### Q18. What is st.selectbox()?
+**Answer:** `st.selectbox()` creates a dropdown menu that allows users to select one option from a list.
+
+### Q19. What is st.button()?
+**Answer:** `st.button()` creates an interactive button. It returns True when the user clicks the button during that script run.
+
+### Q20. What is st.warning()?
+**Answer:** `st.warning()` displays a warning message to inform users about an issue, such as empty input.
+
+### Q21. What is st.spinner()?
+**Answer:** `st.spinner()` displays a loading message while a time-consuming operation is running, such as generating an AI response.
+
+### Q22. What is st.session_state?
+**Answer:** `st.session_state` is a Streamlit feature that stores information across script reruns during a user's session. We used it to maintain AI generation history.
+
+### Q23. Why is session state useful in our project?
+**Answer:** Streamlit reruns the script when users interact with widgets. Session state helps preserve previously generated responses so that the history does not disappear after every interaction.
+
+---
+
+## SECTION 3: APIs & Gemini Integration
+
+### Q24. What is an API?
+**Answer:** API stands for Application Programming Interface. It allows two software applications to communicate and exchange data.
+
+### Q25. What is an API key?
+**Answer:** An API key is a credential used to authenticate an application when accessing an API. It helps identify and authorize API requests.
+
+### Q26. What is Google Gemini API?
+**Answer:** Gemini API is Google's interface that allows developers to integrate Gemini AI models into their applications.
+
+### Q27. What is the purpose of the Google Gen AI SDK?
+**Answer:** The Google Gen AI SDK provides Python tools and methods that make it easier to interact with Google's generative AI models.
+
+### Q28. What is a client object in the Gemini SDK?
+**Answer:** A client object manages communication with the Gemini API. In our project, we create it using the API key.
+
+```python
+client = genai.Client(api_key=api_key)
+```
+
+### Q29. How do you generate content using Gemini API?
+**Answer:** We use the `generate_content()` method.
+
+```python
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="Explain artificial intelligence."
+)
+```
+
+### Q30. What is a prompt?
+**Answer:** A prompt is an instruction or input provided to an AI model to guide the response it generates.
+
+### Q31. What is prompt engineering?
+**Answer:** Prompt engineering is the process of designing clear and effective instructions to guide an AI model toward producing relevant and useful outputs.
+
+### Q32. What is the purpose of response.text?
+**Answer:** `response.text` accesses the generated text returned by the Gemini API response.
+
+---
+
+## SECTION 4: Environment Variables & Security
+
+### Q33. What is a .env file?
+**Answer:** A `.env` file stores environment variables such as API keys and configuration values separately from the main source code.
+
+### Q34. What is python-dotenv?
+**Answer:** `python-dotenv` is a Python package that loads environment variables from a `.env` file into the application's environment.
+
+### Q35. What is load_dotenv()?
+**Answer:** `load_dotenv()` loads variables defined in the `.env` file so that Python can access them using environment variable functions.
+
+### Q36. What is os.getenv()?
+**Answer:** `os.getenv()` retrieves the value of an environment variable by its name.
+
+Example:
+
+```python
+api_key = os.getenv("GEMINI_API_KEY")
+```
+
+### Q37. Why should we never upload API keys to GitHub?
+**Answer:** API keys are sensitive credentials. If exposed publicly, unauthorized people may use them, potentially causing security risks and unexpected API usage charges.
+
+### Q38. What is .gitignore?
+**Answer:** `.gitignore` is a Git configuration file that specifies files and folders Git should ignore, such as `.env`, virtual environments, and Python cache files.
+
+---
+
+## SECTION 5: Application Logic & Python Concepts
+
+### Q39. What is conditional programming?
+**Answer:** Conditional programming allows a program to execute different blocks of code based on specific conditions using statements such as `if`, `elif`, and `else`.
+
+### Q40. What is the difference between if, elif, and else?
+**Answer:**
+- `if` checks the first condition.
+- `elif` checks another condition if the previous condition is False.
+- `else` executes when none of the preceding conditions are True.
+
+### Q41. What is a variable?
+**Answer:** A variable is a named reference used to store or access data in a program.
+
+### Q42. What is a string?
+**Answer:** A string is a sequence of characters used to represent text in Python.
+
+### Q43. What is an f-string?
+**Answer:** An f-string is a formatted string literal that allows us to insert variables and expressions directly into a string.
+
+Example:
+
+```python
+name = "Pallavi"
+print(f"Hello {name}")
+```
+
+### Q44. What is a function in Python?
+**Answer:** A function is a reusable block of code designed to perform a specific task. It helps improve code organization, readability, and reusability.
+
+### Q45. What is the purpose of the return statement?
+**Answer:** The `return` statement sends a result from a function back to the code that called it.
+
+### Q46. What is a dictionary in Python?
+**Answer:** A dictionary is a collection of key-value pairs. It allows us to store and retrieve values using unique keys.
+
+### Q47. Why did we use dictionaries in our AI Text Assistant?
+**Answer:** We used dictionaries to map user selections to their corresponding task, tone, and output-length instructions. This reduced repetitive conditional statements and made the code easier to maintain.
+
+### Q48. What is input validation?
+**Answer:** Input validation checks whether the data provided by the user meets the application's requirements before processing it.
+
+### Q49. What does strip() do?
+**Answer:** The `strip()` method removes leading and trailing whitespace characters from a string.
+
+### Q50. Why did we use len()?
+**Answer:** The `len()` function returns the number of characters in a string. We used it to validate the minimum and maximum input length.
+
+---
+
+## SECTION 6: Error Handling & Debugging
+
+### Q51. What is exception handling?
+**Answer:** Exception handling is a programming mechanism used to manage runtime errors without abruptly terminating the application.
+
+### Q52. What is try-except?
+**Answer:** The `try` block contains code that may produce an error. The `except` block handles the error if an exception occurs.
+
+### Q53. Why did we use exception handling in our project?
+**Answer:** We used exception handling around the Gemini API request to handle problems such as API errors, authentication failures, and network issues.
+
+### Q54. What is ModuleNotFoundError?
+**Answer:** It is a Python error that occurs when the interpreter cannot find a required module. It can happen when a package is not installed in the active environment.
+
+### Q55. What is a 429 API error?
+**Answer:** HTTP 429 indicates that too many requests have been made within a particular period or that an API quota limit has been reached.
+
+### Q56. What is the difference between syntax errors and runtime errors?
+**Answer:**
+- A syntax error occurs when code violates the language's syntax rules.
+- A runtime error occurs while the program is executing.
+
+---
+
+## SECTION 7: Git & GitHub
+
+### Q57. What is Git?
+**Answer:** Git is a distributed version control system used to track changes in source code and collaborate with other developers.
+
+### Q58. What is GitHub?
+**Answer:** GitHub is a cloud-based platform that hosts Git repositories and provides tools for code sharing, collaboration, and project management.
+
+### Q59. What is the difference between Git and GitHub?
+**Answer:** Git is a version control tool, while GitHub is an online platform used to host and collaborate on Git repositories.
+
+### Q60. What is a Git repository?
+**Answer:** A Git repository is a project directory tracked by Git. It stores the project's files and version history.
+
+### Q61. What is git init?
+**Answer:** `git init` initializes a new Git repository in the current project directory.
+
+### Q62. What is git status?
+**Answer:** `git status` displays the current state of the repository, including modified, staged, and untracked files.
+
+### Q63. What is git config?
+**Answer:** `git config` is used to configure Git settings, such as the user's name and email address.
+
+### Q64. Why do we configure user.name and user.email?
+**Answer:** Git uses these details to identify the author of commits.
+
+### Q65. What are untracked files?
+**Answer:** Untracked files are files in the project directory that Git has not started tracking yet.
+
+---
+
+## SECTION 8: Project-Based Questions
+
+### Q66. Tell me about your AI Text Assistant project.
+**Answer:** I developed an AI Text Assistant using Python, Streamlit, and Google's Gemini API. It allows users to summarize, rewrite, and explain text. Users can also select the response tone and output length. I implemented input validation, error handling, loading indicators, and session-based generation history.
+
+### Q67. What technologies did you use?
+**Answer:**
+- Python: Application logic.
+- Streamlit: User interface.
+- Google Gemini API: AI text generation.
+- Google Gen AI SDK: API integration.
+- python-dotenv: Environment variable management.
+- Git: Version control.
+
+### Q68. How does your application work?
+**Answer:** First, the user selects an AI task, response tone, and output length. Then the user enters text and clicks Generate. The application creates a dynamic prompt based on these selections and sends it to the Gemini API. Finally, the generated response is displayed in the application.
+
+### Q69. What challenges did you face while developing this project?
+**Answer:** I faced dependency installation issues, API configuration problems, and errors while integrating the custom copy functionality. I resolved these issues through debugging and testing.
+
+### Q70. What improvements would you make in the future?
+**Answer:** I would add persistent chat history using a database, user authentication, a more advanced frontend, and a separate backend using FastAPI.
+
+---
+
+## SECTION 9: Important Commands Revision
+
+| Command | Purpose |
+|---|---|
+| `python --version` | Check Python version |
+| `python -m venv .venv` | Create virtual environment |
+| `.\.venv\Scripts\Activate.ps1` | Activate environment |
+| `deactivate` | Deactivate environment |
+| `python -m pip install -r requirements.txt` | Install dependencies |
+| `python -m pip list` | List installed packages |
+| `pip freeze` | Display installed package versions |
+| `streamlit run main.py` | Run Streamlit application |
+| `git --version` | Check Git version |
+| `git config --global --list` | Display Git configuration |
+| `git init` | Initialize repository |
+| `git status` | Check repository status |
+
+---
+
+## Important Interview Reminder
+
+Do not claim that you have completed GitHub publishing or deployment yet. These are still pending steps in this project.
+
+Be prepared to explain the actual code you wrote, especially:
+1. Virtual environments and dependencies.
+2. Streamlit widgets and application flow.
+3. Gemini API integration.
+4. Dynamic prompt creation.
+5. Functions and dictionaries.
+6. Exception handling.
+7. Session state and chat history.
+8. Git and version control.
